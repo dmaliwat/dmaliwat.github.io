@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="uname" id="uname" />
+    <br>
+    <button onclick="subscribe();">Subscribe</button>
+
+    <script>
+
+        if("serviceWorker" in navigator) {
+            addEventListener('load', async () => {
+                let sw = await navigator.serviceWorker.register('./sw.js');
+                console.log(sw);
+            });
+        }
+
+        async function subscribe(){
+            let sw = await navigator.serviceWorker.ready;
+            let push = await sw.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: 'BErYr0RfC0HGsv9GDjULAaR4t5mQk8F4BXJ8NKW5Ea0n0o-PC2gXRHUx3JmfjMVp76DMRL-J_DVS6TEBspVD5mQ'
+            });
+
+            console.log(JSON.stringify(push));
+
+            // var uname = document.getElementById('uname').value;
+
+            // var xhr = new XMLHttpRequest();
+            // var subUrl = 'http://localhost:3000/register';
+            // xhr.open("POST", subUrl, true);
+            // xhr.setRequestHeader('Content-Type', 'application/json');
+            // var res = xhr.send(JSON.stringify({
+            //     user_name: uname,
+            //     unit_data: push
+            // }));
+
+            // if(!res){
+            //     alert('Registration Successful!');
+            //     document.getElementById('uname').value = "";
+            // }
+        }
+
+    </script>
+</body>
+</html>
