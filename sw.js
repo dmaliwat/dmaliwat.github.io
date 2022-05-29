@@ -1,5 +1,5 @@
 self.addEventListener('push', () => {
-    self.ServiceWorkerRegistration.sendNotification('test message', {});
+    self.registration.sendNotification('test message', {});
 });
 
 self.addEventListener('push', function(e) {
@@ -25,6 +25,6 @@ self.addEventListener('push', function(e) {
         ]
     };
     e.waitUntil(
-        self.ServiceWorkerRegistration.showNotification('Hello there!', options)
+        self.registration.showNotification('Hello there!', options)
     );
 })
